@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
     min-height: 100vh;
     min-width: 100vh;
+    padding: 0 100px;
+    background: #232227;
 }
 
 .flexBlock {
@@ -17,6 +21,8 @@ body {
 
 .container {
     margin: 25px 213px;
+    color: #fff;
+    font-size: 1.5rem;
 }
 
 .container .namesOfDays {
@@ -25,6 +31,7 @@ body {
     width: 100%;
     grid-template-columns: repeat(7, auto);
     column-gap: 45px;
+    margin-bottom: 1.5rem;
 }
 
 .container .calendar {
@@ -35,10 +42,12 @@ body {
     row-gap: 20px;
 }
 .day {
-    background-color: red;
+    padding: 15px 0;
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 10px;
 }
 
 .previousMonth,
 .nextMonth {
-    background: gray;
+    opacity: .3;
 }

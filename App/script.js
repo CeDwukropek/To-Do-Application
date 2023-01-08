@@ -3,7 +3,7 @@
 const container = document.querySelector(".calendar")
 const date = new Date()
 const actualYear = date.getFullYear()
-const actualMonth = date.getMonth() + 5
+const actualMonth = date.getMonth() + 0
 
 const daysCount = (month = actualMonth) => {
     return new Date(actualYear, month + 1, 0).getDate()
@@ -13,7 +13,7 @@ const firstDayInMonth = () => {
 }
 const createPreviousDays = (daysCounter, daysFromPreviousMonth) => {
     for (let i = 0; i < daysFromPreviousMonth; i++) {
-        let createdDiv = appendChildMultiple(i + 1)
+        let createdDiv = appendDays(i + 1)
         let firstDayFromPreviousMonth = daysCount(actualMonth - 1) - daysFromPreviousMonth + 1
         let pInDiv = createdDiv.getElementsByTagName('p')[0]
 
@@ -27,7 +27,7 @@ const createPreviousDays = (daysCounter, daysFromPreviousMonth) => {
 }
 const createNormalDays = (daysCounter, days) => {
     for (let i = 0; i < days; i++) {
-        let createdDiv = appendChildMultiple(i + 1)
+        let createdDiv = appendDays(i + 1)
 
         createdDiv.setAttribute('id', i + 1)
         daysCounter++
@@ -37,7 +37,7 @@ const createNormalDays = (daysCounter, days) => {
 }
 function createNextDays(daysCounter, maxDays) {
     for (let i = daysCounter, j = 1; i < maxDays; i++, j++) {
-        let createdDiv = appendChildMultiple(i + 1)
+        let createdDiv = appendDays(i + 1)
         let pInDiv = createdDiv.getElementsByTagName('p')[0]
 
         createdDiv.setAttribute('id', j)
@@ -64,7 +64,7 @@ function createDays(days) {
     }
 }
 
-const appendChildMultiple = (counter) => {
+const appendDays = (counter) => {
     const div = document.createElement("div")
     const p = document.createElement("p")
     div.classList.add('day')
