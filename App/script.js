@@ -3,10 +3,10 @@
 const container = document.querySelector(".calendar")
 const date = new Date()
 const actualYear = date.getFullYear()
-const actualMonth = date.getMonth() + 4
+const actualMonth = date.getMonth() + 5
 
-const daysCount = () => {
-    return new Date(actualYear, actualMonth + 1, 0).getDate()
+const daysCount = (month = actualMonth) => {
+    return new Date(actualYear, month + 1, 0).getDate()
 }
 const firstDayInMonth = () => {
     return new Date(actualYear, actualMonth).getDay()
@@ -14,7 +14,7 @@ const firstDayInMonth = () => {
 const createPreviousDays = (daysCounter, daysFromPreviousMonth) => {
     for (let i = 0; i < daysFromPreviousMonth; i++) {
         let createdDiv = appendChildMultiple(i + 1)
-        let firstDayFromPreviousMonth = daysCount() - 5
+        let firstDayFromPreviousMonth = daysCount(actualMonth - 1) - daysFromPreviousMonth + 1
         let pInDiv = createdDiv.getElementsByTagName('p')[0]
 
         createdDiv.setAttribute('id', firstDayFromPreviousMonth + i)
