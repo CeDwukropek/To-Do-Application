@@ -76,7 +76,7 @@ function createDays(days) {
     daysFromPreviousMonth = daysFromPreviousMonth < 0 ? daysFromPreviousMonth = 6 : daysFromPreviousMonth
     
     //sets maximum number of days in calendar month
-    let maxDays = (daysFromPreviousMonth + daysCount()) > (5 * 7) ? (6 * 7) : (5 * 7)
+    let maxDays = (daysFromPreviousMonth + days) > (5 * 7) ? (6 * 7) : (5 * 7)
 
     daysCounter += createPreviousDays(daysCounter, daysFromPreviousMonth)
     daysCounter = createNormalDays(daysCounter, days)
