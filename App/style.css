@@ -38,6 +38,7 @@ body {
     background-color: red;
 }
 
-.previousMonth {
+.previousMonth,
+.nextMonth {
     background: gray;
 }
