@@ -3,7 +3,7 @@
 const container = document.querySelector(".calendar")
 const date = new Date()
 const actualYear = date.getFullYear()
-const actualMonth = date.getMonth() + 0
+const actualMonth = date.getMonth() + 4
 
 const daysCount = (month = actualMonth) => {
     return new Date(actualYear, month + 1, 0).getDate()
@@ -11,6 +11,20 @@ const daysCount = (month = actualMonth) => {
 const firstDayInMonth = () => {
     return new Date(actualYear, actualMonth).getDay()
 }
+
+const appendDays = (counter) => {
+    const div = document.createElement("div")
+    const p = document.createElement("p")
+    div.classList.add('day')
+    div.classList.add('flexBlock')
+
+    container.appendChild(div);
+    div.appendChild(p)
+    p.innerHTML = counter
+
+    return div
+}
+
 const createPreviousDays = (daysCounter, daysFromPreviousMonth) => {
     for (let i = 0; i < daysFromPreviousMonth; i++) {
         let createdDiv = appendDays(i + 1)
@@ -54,27 +68,9 @@ function createDays(days) {
     
     let maxDays = (daysFromPreviousMonth + daysCount()) > (5 * 7) ? (6 * 7) : (5 * 7)
 
-    if (firstDayInMonth() == 1) {
-        daysCounter += createNormalDays(daysCounter, days)
-        createNextDays(daysCounter, maxDays)
-    } else {
-        daysCounter += createPreviousDays(daysCounter, daysFromPreviousMonth)
-        daysCounter = createNormalDays(daysCounter, days)
-        createNextDays(daysCounter, maxDays)
-    }
-}
-
-const appendDays = (counter) => {
-    const div = document.createElement("div")
-    const p = document.createElement("p")
-    div.classList.add('day')
-    div.classList.add('flexBlock')
-
-    container.appendChild(div);
-    div.appendChild(p)
-    p.innerHTML = counter
-
-    return div
+    daysCounter += createPreviousDays(daysCounter, daysFromPreviousMonth)
+    daysCounter = createNormalDays(daysCounter, days)
+    createNextDays(daysCounter, maxDays)
 }
 
 createDays(daysCount())
