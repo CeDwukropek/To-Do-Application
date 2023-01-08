@@ -1,20 +1,24 @@
 
-
-const container = document.querySelector(".calendar")
+//global variables
+const container = document.querySelector(".calendar") //container for days
 const date = new Date()
 const actualYear = date.getFullYear()
-const actualMonth = date.getMonth() + 4
+const actualMonth = date.getMonth()
 
+//counts days in this month
 const daysCount = (month = actualMonth) => {
     return new Date(actualYear, month + 1, 0).getDate()
 }
+//finds index of first day in this month
 const firstDayInMonth = () => {
     return new Date(actualYear, actualMonth).getDay()
 }
 
+//appends days on website
 const appendDays = (counter) => {
     const div = document.createElement("div")
     const p = document.createElement("p")
+
     div.classList.add('day')
     div.classList.add('flexBlock')
 
@@ -25,6 +29,7 @@ const appendDays = (counter) => {
     return div
 }
 
+//creates days from previous month
 const createPreviousDays = (daysCounter, daysFromPreviousMonth) => {
     for (let i = 0; i < daysFromPreviousMonth; i++) {
         let createdDiv = appendDays(i + 1)
@@ -39,6 +44,7 @@ const createPreviousDays = (daysCounter, daysFromPreviousMonth) => {
 
     return daysCounter
 }
+//creates regular days from this month
 const createNormalDays = (daysCounter, days) => {
     for (let i = 0; i < days; i++) {
         let createdDiv = appendDays(i + 1)
@@ -49,6 +55,7 @@ const createNormalDays = (daysCounter, days) => {
 
     return daysCounter
 }
+//fills month with days from next month
 function createNextDays(daysCounter, maxDays) {
     for (let i = daysCounter, j = 1; i < maxDays; i++, j++) {
         let createdDiv = appendDays(i + 1)
@@ -60,12 +67,15 @@ function createNextDays(daysCounter, maxDays) {
     }
 }
 
+//system of creating days
 function createDays(days) {
     let daysCounter = 0
     let daysFromPreviousMonth = firstDayInMonth() - 1;
     
+    //sets number 6 if first day in month was Sunday
     daysFromPreviousMonth = daysFromPreviousMonth < 0 ? daysFromPreviousMonth = 6 : daysFromPreviousMonth
     
+    //sets maximum number of days in calendar month
     let maxDays = (daysFromPreviousMonth + daysCount()) > (5 * 7) ? (6 * 7) : (5 * 7)
 
     daysCounter += createPreviousDays(daysCounter, daysFromPreviousMonth)
@@ -73,6 +83,7 @@ function createDays(days) {
     createNextDays(daysCounter, maxDays)
 }
 
+//run function to create days in calendar
 createDays(daysCount())
 
 
