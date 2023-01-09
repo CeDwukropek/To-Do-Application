@@ -34,6 +34,10 @@ body {
     margin-bottom: 1.5rem;
 }
 
+.container .namesOfDays p:nth-child(7n+7) {
+    color: rgb(255, 68, 68);
+}
+
 .container .calendar {
     display: grid;
 
@@ -45,6 +49,10 @@ body {
     padding: 15px 0;
     background-color: rgba(255, 255, 255, .1);
     border-radius: 10px;
+}
+
+.day:nth-child(7n+7) {
+    color: rgb(255, 68, 68);
 }
 
 .previousMonth,
