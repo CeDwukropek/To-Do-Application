@@ -55,6 +55,11 @@ body {
     color: rgb(255, 68, 68);
 }
 
+.today {
+    color: rgb(255, 128, 227);
+    background-color: rgba(255, 255, 255, .2);
+}
+
 .previousMonth,
 .nextMonth {
     opacity: .3;

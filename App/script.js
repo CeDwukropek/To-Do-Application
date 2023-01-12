@@ -1,9 +1,8 @@
 
 //global variables
 const container = document.querySelector(".calendar") //container for days
-const date = new Date()
-const actualYear = date.getFullYear()
-const actualMonth = date.getMonth()
+const actualYear = new Date().getFullYear()
+const actualMonth = new Date().getMonth()
 
 //counts days in this month
 const daysCount = (month = actualMonth) => {
@@ -12,6 +11,10 @@ const daysCount = (month = actualMonth) => {
 //finds index of first day in this month
 const firstDayInMonth = () => {
     return new Date(actualYear, actualMonth).getDay()
+}
+
+const today = () => {
+    return new Date().getDate()
 }
 
 //appends days on website
@@ -81,6 +84,9 @@ function createDays(days) {
     daysCounter += createPreviousDays(daysCounter, daysFromPreviousMonth)
     daysCounter = createNormalDays(daysCounter, days)
     createNextDays(daysCounter, maxDays)
+
+    console.log(today())
+    document.getElementById(today()).classList.add("today")
 }
 
 //run function to create days in calendar
