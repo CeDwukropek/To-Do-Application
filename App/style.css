@@ -6,6 +6,11 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+:root {
+    --day-bg-color: #2E2C33;
+    --today-bg-color: #393740;
+}
+
 body {
     min-height: 100vh;
     min-width: 100vh;
@@ -45,19 +50,64 @@ body {
     column-gap: 45px;
     row-gap: 20px;
 }
+
+/* container */
 .day {
-    padding: 15px 0;
-    background-color: rgba(255, 255, 255, .1);
+    position: relative;
     border-radius: 10px;
+
+    cursor: pointer;
+    z-index: 2;
+}
+
+.content {
+    padding: 15px 0;
+    position: relative;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    margin: 1px;
+    z-index: 2;
+    border-radius: inherit;
+    background-color: var(--day-bg-color);
+}
+
+.day::before,
+.day::after{
+    position: absolute;
+    border-radius: inherit;
+    content: '';
+    height: 100%;
+    width: 100%;
+    top: 0;
+    z-index: 3;
+}
+/* gradient on top */
+.day::before {
+    background: radial-gradient(
+        400px circle at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, .08), /* "hover" value */
+        transparent 50% /* "default" value */
+    );
+    z-index: 3;
+    pointer-events: none;
+}
+/* border */
+.day::after {
+    background: radial-gradient(
+        150px circle at var(--mouse-x) var(--mouse-y),
+        rgba(255, 255, 255, .6) 0%, /* "hover" value */
+        rgba(255, 255, 255, .2) 100% /* "default" value */
+    );
+    z-index: 1;
 }
 
 .day:nth-child(7n+7) {
     color: rgb(255, 68, 68);
 }
 
-.today {
+.today .content{
     color: rgb(255, 128, 227);
-    background-color: rgba(255, 255, 255, .2);
+    background-color: var(--today-bg-color);
 }
 
 .previousMonth,

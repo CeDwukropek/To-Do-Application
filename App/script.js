@@ -20,13 +20,18 @@ const today = () => {
 //appends days on website
 const appendDays = (counter) => {
     const div = document.createElement("div")
+    const div2 = document.createElement("div")
     const p = document.createElement("p")
 
     div.classList.add('day')
-    div.classList.add('flexBlock')
-
+    
     container.appendChild(div);
-    div.appendChild(p)
+    div.appendChild(div2)
+
+    div2.classList.add('flexBlock')
+    div2.classList.add('content')
+
+    div2.appendChild(p)
     p.innerHTML = counter
 
     return div
@@ -91,5 +96,4 @@ function createDays(days) {
 
 //run function to create days in calendar
 createDays(daysCount())
-
 
