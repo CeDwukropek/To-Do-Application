@@ -94,6 +94,12 @@ function createDays(days) {
     document.getElementById(today()).classList.add("today")
 }
 
+//run function to create days in calendar
+createDays(daysCount())
+
+
+
+
 //custom shadow BG for days
 const containers = document.querySelectorAll('.day')
 
@@ -118,7 +124,4 @@ document.onmousemove = e => {
         el.style.setProperty("--mouse-y", `${y}px`)
     }
 }
-
-//run function to create days in calendar
-createDays(daysCount())
 
