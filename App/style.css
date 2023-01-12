@@ -24,13 +24,15 @@ body {
     align-items: center;
 }
 
-.container {
+/* CALENDAR */
+
+.calendarContainer {
     margin: 0 213px;
     color: #fff;
     font-size: 1.5rem;
 }
 
-.container .namesOfDays {
+.calendarContainer .namesOfDays {
     display: grid;
 
     width: 100%;
@@ -39,11 +41,11 @@ body {
     margin-bottom: 1.5rem;
 }
 
-.container .namesOfDays p:nth-child(7n+7) {
+.calendarContainer .namesOfDays p:nth-child(7n+7) {
     color: rgb(255, 68, 68);
 }
 
-.container .calendar {
+.calendarContainer .calendar {
     display: grid;
 
     grid-template-columns: repeat(7, auto);
@@ -114,3 +116,4 @@ body {
 .nextMonth {
     opacity: .3;
 }
+
