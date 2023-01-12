@@ -1,6 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
 
+body {
+    min-height: 100vh;
+    min-width: 100vh;
+    padding: 10px 100px;
+    background: #232227;
+}
+
+.flexBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    margin: 0 213px;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.container .namesOfDays {
+    display: grid;
+
+    width: 100%;
+    grid-template-columns: repeat(7, auto);
+    column-gap: 45px;
+    margin-bottom: 1.5rem;
+}
+
+.container .namesOfDays p:nth-child(7n+7) {
+    color: rgb(255, 68, 68);
+}
+
+.container .calendar {
+    display: grid;
+
+    grid-template-columns: repeat(7, auto);
+    column-gap: 45px;
+    row-gap: 20px;
+}
+.day {
+    padding: 15px 0;
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 10px;
+}
+
+.day:nth-child(7n+7) {
+    color: rgb(255, 68, 68);
+}
+
+.today {
+    color: rgb(255, 128, 227);
+    background-color: rgba(255, 255, 255, .2);
+}
+
+.previousMonth,
+.nextMonth {
+    opacity: .3;
+}
