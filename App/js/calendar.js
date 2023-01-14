@@ -75,8 +75,8 @@ function createNextDays(daysCounter, maxDays) {
     }
 }
 
-//system of creating days
-function createDays(days) {
+//system of creating days and running function to create days in calendar
+(function createDays(days) {
     let daysCounter = 0
     let daysFromPreviousMonth = firstDayInMonth() - 1;
     
@@ -90,14 +90,8 @@ function createDays(days) {
     daysCounter = createNormalDays(daysCounter, days)
     createNextDays(daysCounter, maxDays)
 
-    console.log(today())
     document.getElementById(today()).classList.add("today")
-}
-
-//run function to create days in calendar
-createDays(daysCount())
-
-
+})(daysCount())
 
 
 //custom shadow BG for days
