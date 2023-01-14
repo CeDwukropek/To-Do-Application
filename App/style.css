@@ -14,7 +14,7 @@
 body {
     min-height: 100vh;
     min-width: 100vh;
-    padding: 10px 100px;
+    padding: 0 100px 100px;
     background: #232227;
 }
 
@@ -27,7 +27,7 @@ body {
 /* CALENDAR */
 
 .calendarContainer {
-    margin: 0 213px;
+    margin: 50px 200px;
     color: #fff;
     font-size: 1.5rem;
 }
@@ -36,7 +36,7 @@ body {
     display: grid;
 
     width: 100%;
-    grid-template-columns: repeat(7, auto);
+    grid-template-columns: repeat(7, 1fr);
     column-gap: 45px;
     margin-bottom: 1.5rem;
 }
@@ -48,7 +48,7 @@ body {
 .calendarContainer .calendar {
     display: grid;
 
-    grid-template-columns: repeat(7, auto);
+    grid-template-columns: repeat(7, 1fr);
     column-gap: 45px;
     row-gap: 20px;
 }
@@ -62,7 +62,7 @@ body {
     z-index: 2;
 }
 
-.content {
+.day .content {
     padding: 15px 0;
     position: relative;
     width: calc(100% - 2px);
@@ -117,3 +117,101 @@ body {
     opacity: .3;
 }
 
+
+
+/* NOTES */
+.notesContainer {
+    position: relative;
+    display: grid;
+
+    padding: 0 150px;
+
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 60px;
+    row-gap: 60px;
+    margin-bottom: 1.5rem;
+}
+
+.stickyNote {
+    position: relative;
+    flex-direction: column;
+    max-width: 500px;
+    max-height: 400px;
+    background-color: #32383d;
+    color: white;
+    aspect-ratio: 5/4;
+    box-shadow:
+        0px 1.8px 2.4px rgba(0, 0, 0, 0.093),
+        0px 4.4px 6.1px rgba(0, 0, 0, 0.133),
+        0px 9px 12.4px rgba(0, 0, 0, 0.167),
+        0px 18.6px 25.6px rgba(0, 0, 0, 0.207),
+        0px 51px 70px rgba(0, 0, 0, 0.3)
+    ;
+}
+
+.stickyNote .head {
+    position: relative;
+    background-color: aqua;
+    height: 10%;
+    width: 100%;
+}
+
+.stickyNote .body {
+    position: relative;
+    height: calc(90% - 30px);
+    width: calc(100% - 30px);
+    margin: 15px;
+}
+
+.stickyNote .content {
+    position: relative;
+    height: 90%;
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.stickyNote .bottom {
+    position: relative;
+    height: 10%;
+    width: 100%;
+    justify-content: space-between;
+}
+.stickyNote .bottom .date {
+    position: relative;
+    display: flex;
+    height: 100%;
+    align-items: flex-end;
+}
+
+.stickyNote .bottom .navigationDot {
+    position: relative;
+    height: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: #555e63;
+    background-image: url('images/icons/icons8-chevron-left-60-light.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70%;
+        box-shadow:
+        0px 2.2px 3.6px rgba(0, 0, 0, 0.105),
+        0px 6.1px 9.9px rgba(0, 0, 0, 0.15),
+        0px 14.8px 23.8px rgba(0, 0, 0, 0.195),
+        0px 50px 79px rgba(0, 0, 0, 0.3)
+    ;
+}
+
+#noteCreator {
+    font-style: italic;
+}
+
+#noteCreator > div {
+    color: #9cacb4;
+}
+
+@media screen and (max-width: 1500px){
+    body {
+        padding: 10px 0;
+    }
+}
