@@ -90,7 +90,6 @@ function createNextDays(daysCounter, maxDays) {
     daysCounter = createNormalDays(daysCounter, days)
     createNextDays(daysCounter, maxDays)
 
-    console.log(today())
     document.getElementById(today()).classList.add("today")
 })(daysCount())
 

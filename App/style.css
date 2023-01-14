@@ -31,7 +31,6 @@ body {
     color: #fff;
     font-size: 1.5rem;
 }
-
 .calendarContainer .namesOfDays {
     display: grid;
 
@@ -40,11 +39,9 @@ body {
     column-gap: 45px;
     margin-bottom: 1.5rem;
 }
-
 .calendarContainer .namesOfDays p:nth-child(7n+7) {
     color: rgb(255, 68, 68);
 }
-
 .calendarContainer .calendar {
     display: grid;
 
@@ -61,7 +58,6 @@ body {
     cursor: pointer;
     z-index: 2;
 }
-
 .day .content {
     padding: 15px 0;
     position: relative;
@@ -168,7 +164,7 @@ body {
     position: relative;
     height: 90%;
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .stickyNote .bottom {
@@ -184,28 +180,37 @@ body {
     align-items: flex-end;
 }
 
-.stickyNote .bottom .navigationDot {
+.navigationDot {
     position: relative;
     height: 100%;
     aspect-ratio: 1/1;
     border-radius: 50%;
     background-color: #555e63;
-    background-image: url('images/icons/icons8-chevron-left-60-light.png');
+/*    background-image: url('images/icons/icons8-chevron-left-60-light.png');
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 70%;
+    background-size: 70%; */
         box-shadow:
         0px 2.2px 3.6px rgba(0, 0, 0, 0.105),
         0px 6.1px 9.9px rgba(0, 0, 0, 0.15),
         0px 14.8px 23.8px rgba(0, 0, 0, 0.195),
         0px 50px 79px rgba(0, 0, 0, 0.3)
     ;
+    cursor: pointer;
+}
+.navigationDot img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: 200ms;
+}
+.active img {
+    transform: rotate(180deg);
 }
 
 #noteCreator {
     font-style: italic;
 }
-
 #noteCreator > div {
     color: #9cacb4;
 }
