@@ -98,7 +98,7 @@ function createNextDays(daysCounter, maxDays) {
 const containers = document.querySelectorAll('.day')
 
 //setting values before users move
-for(const el of containers) {
+for(const el of containers){
     const rect = el.getBoundingClientRect(),
           x = 0 - rect.left,
           y = 0 - rect.top;
