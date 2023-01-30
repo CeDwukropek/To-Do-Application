@@ -8,7 +8,11 @@
 
 :root {
     --day-bg-color: #2E2C33;
+    --day-hover-bg-color: #494550;
     --today-bg-color: #393740;
+    --sticky-note-bg-color: #32383d;
+    --border-color: rgb(255, 255, 255);
+    --shadow-color: rgba(255, 255, 255, .08);
 }
 
 body {
@@ -67,6 +71,10 @@ body {
     z-index: 2;
     border-radius: inherit;
     background-color: var(--day-bg-color);
+    transition: 200ms;
+}
+.day .content:hover {
+    background-color: var(--day-hover-bg-color);
 }
 
 .day::before,
@@ -83,7 +91,7 @@ body {
 .day::before {
     background: radial-gradient(
         400px circle at var(--mouse-x) var(--mouse-y),
-        rgba(255, 255, 255, .08), /* "hover" value */
+        var(--shadow-color), /* "hover" value */
         transparent 50% /* "default" value */
     );
     z-index: 3;
@@ -93,7 +101,7 @@ body {
 .day::after {
     background: radial-gradient(
         150px circle at var(--mouse-x) var(--mouse-y),
-        rgba(255, 255, 255, .6) 0%, /* "hover" value */
+        var(--border-color) 0%, /* "hover" value */
         rgba(255, 255, 255, .2) 100% /* "default" value */
     );
     z-index: 1;
@@ -104,8 +112,11 @@ body {
 }
 
 .today .content{
-    color: rgb(255, 128, 227);
+    color: #FF80E3;
     background-color: var(--today-bg-color);
+}
+.today .content:hover {
+    background-color: var(--day-hover-bg-color);
 }
 
 .previousMonth,
@@ -134,7 +145,7 @@ body {
     flex-direction: column;
     max-width: 500px;
     max-height: 400px;
-    background-color: #32383d;
+    background-color: var(--sticky-note-bg-color);
     color: white;
     aspect-ratio: 5/4;
     box-shadow:
@@ -159,21 +170,70 @@ body {
     width: calc(100% - 30px);
     margin: 15px;
 }
-
-.stickyNote .content {
+.stickyNote .body .content {
     position: relative;
     height: 90%;
     width: 100%;
     font-size: 1.3rem;
 }
+.stickyNote .body .content textarea,
+.stickyNote .body .bottom input {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 1.3rem;
+    color: white;
+    cursor: default;
+}
+.stickyNote .body .content textarea::placeholder,
+.stickyNote .body .bottom input::placeholder {
+    font-style: italic;
+    color: #70797e;
+    transition: 200ms;
+}
+.stickyNote .body .bottom input::placeholder {
+    font-size: 1rem;
+}
+.stickyNote .body .content textarea:hover::placeholder,
+.stickyNote .body .bottom input:hover::placeholder {
+    color: #becfd8;
+}
+#textAreaContent::-webkit-scrollbar-track
+{
+	background-color: var(--sticky-note-bg-color);
+    cursor: default;
+    z-index: 10;
+}
 
-.stickyNote .bottom {
+#textAreaContent::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: var(--sticky-note-bg-color);
+    cursor: default;
+    z-index: 10;
+}
+
+#textAreaContent::-webkit-scrollbar-thumb
+{
+	background-color: #555e63;
+    cursor: default;
+    z-index: 10;
+}
+#textAreaContent::-webkit-scrollbar-thumb:hover {
+    background-color: #646e74;
+}
+
+.stickyNote .body .bottom {
     position: relative;
     height: 10%;
     width: 100%;
     justify-content: space-between;
 }
-.stickyNote .bottom .date {
+.stickyNote .body .bottom .date {
     position: relative;
     display: flex;
     height: 100%;
@@ -186,10 +246,6 @@ body {
     aspect-ratio: 1/1;
     border-radius: 50%;
     background-color: #555e63;
-/*    background-image: url('images/icons/icons8-chevron-left-60-light.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 70%; */
         box-shadow:
         0px 2.2px 3.6px rgba(0, 0, 0, 0.105),
         0px 6.1px 9.9px rgba(0, 0, 0, 0.15),
@@ -208,12 +264,7 @@ body {
     transform: rotate(180deg);
 }
 
-#noteCreator {
-    font-style: italic;
-}
-#noteCreator > div {
-    color: #9cacb4;
-}
+
 
 @media screen and (max-width: 1500px){
     body {

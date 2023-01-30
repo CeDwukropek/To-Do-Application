@@ -4,19 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/color-picker.css">
     <title>To Do App</title>
 </head>
 <body>
     <div class="calendarContainer">
         <div class="namesOfDays">
-            <p class="flexBlock">P</p>
-            <p class="flexBlock">W</p>
-            <p class="flexBlock">Ś</p>
-            <p class="flexBlock">C</p>
-            <p class="flexBlock">P</p>
-            <p class="flexBlock">S</p>
-            <p class="flexBlock">N</p>
+            <p class="flexBlock">Pn</p>
+            <p class="flexBlock">Wt</p>
+            <p class="flexBlock">Śr</p>
+            <p class="flexBlock">Czw</p>
+            <p class="flexBlock">Pt</p>
+            <p class="flexBlock">Sb</p>
+            <p class="flexBlock">Nd</p>
         </div>
         <div class="calendar"></div>
     </div>
@@ -25,13 +26,11 @@
             <div class="head"></div>
             <div class="body">
                 <div class="content">
-                    <p>
-                        Zacznij pisać...
-                    </p>
+                    <textarea placeholder="Zacznij pisać tutaj..." id="textAreaContent"></textarea>
                 </div>
                 <div class="flexBlock bottom">
                     <div class="date">
-                        14.01.2023
+                        <input type="datetime" name="datetime" id="dateCreator">
                     </div>
                     <div class="navigationDot flexBlock" id="1">
                         <img src="images/icons/row-top-light.png" alt="arrow">
@@ -62,10 +61,7 @@
         <div class="stickyNote flexBlock">
             <div class="head"></div>
             <div class="body">
-                <div class="content">
-                    <p>
-                        Ale może być też więcej tekstu. W tedy zaczyna się ładnie zawijać.
-                    </p>
+                <div class="content" id="colorPicker">
                 </div>
                 <div class="flexBlock bottom">
                     <div class="date">
@@ -77,10 +73,10 @@
                 </div>
             </div>
         </div>
-        
     </div>
 </body>
 <script src="js/jquery-3.6.1.min.js"></script>
 <script src="js/calendar.js"></script>
-<script src="js/navigationDot.js"></script>
+<script src="js/stickyNotes.js"></script>
+<script src="js/color-picker.js"></script>
 </html>
