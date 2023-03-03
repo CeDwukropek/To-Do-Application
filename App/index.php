@@ -5,9 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/color-picker.css">
     <title>To Do App</title>
 </head>
+
+<?php
+    $conn = mysqli_connect('localhost', 'root', '', 'to-do-application');
+
+    if (!$conn) {
+        echo "Błąd połączenia";
+    } else {
+        $gmail = 'emilkopytek@gmail.com';
+        $password = '1234';
+
+/*         $gmail = $_POST['email'];
+        $password = $_POST['password'];
+ */
+        $find_user = mysqli_query($conn, "SELECT id FROM user WHERE email = '$gmail' AND password = '$password'");
+        $result = mysqli_fetch_array($find_user);
+
+        $notes = mysqli_query($conn, "SELECT * FROM note WHERE user_id = $result[id]");
+
+        class note {
+            public $id;
+            public $content;
+            public $date;
+            public $color;
+            public $user_id;
+
+            function __construct($a, $b, $c, $d, $e) {
+                $this->id = $a;
+                $this->content = $b;
+                $this->date = $c;
+                $this->color = $d;
+                $this->user_id = $e;
+            }
+
+            function getContent() {
+                return $this->content;
+            }
+        }
+
+        $notesArray = array();
+        $notes_number = 0;
+    }
+?>
+
 <body>
     <div class="calendarContainer">
         <div class="namesOfDays">
@@ -30,53 +72,75 @@
                 </div>
                 <div class="flexBlock bottom">
                     <div class="date">
-                        <input type="datetime" name="datetime" id="dateCreator">
+                        <input type="date" name="datetime" id="dateCreator">
                     </div>
-                    <div class="navigationDot flexBlock" id="1">
-                        <img src="images/icons/row-top-light.png" alt="arrow">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="stickyNote flexBlock">
-            <div class="head"></div>
-            <div class="body">
-                <div class="content">
-                    <p>
-                        Przykładowy tekst.
-                    </p>
-                </div>
-                <div class="flexBlock bottom">
-                    <div class="date">
-                        14.01.2023
-                    </div>
-                    <div class="navigationDot flexBlock" id="2">
-                        <img src="images/icons/row-top-light.png" alt="arrow">
+                    <div class="send">
+                        <p>Zatwierdź</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="stickyNote flexBlock">
-            <div class="head"></div>
-            <div class="body">
-                <div class="content" id="colorPicker">
-                </div>
-                <div class="flexBlock bottom">
-                    <div class="date">
-                        14.01.2023
+        <?php
+            while($row = $notes -> fetch_assoc()) { 
+                $notesArray[$notes_number] = new note($row['id'], $row['content'], date("d.m.Y", strtotime($row['date'])), $row['color'], $row['user_id']);
+                echo '
+                <div class="stickyNote flexBlock">
+                    <div class="head"></div>
+                    <div class="body">
+                        <div class="content">';
+                        echo $notesArray[$notes_number]->content;
+                    echo'</div>
+                        <div class="flexBlock bottom">
+                            <div class="date">';
+                            echo $notesArray[$notes_number]->date;
+                    echo '</div>
+                        </div>
                     </div>
-                    <div class="navigationDot flexBlock" id="3">
-                        <img src="images/icons/row-top-light.png" alt="arrow">
-                    </div>
-                </div>
-            </div>
-        </div>
+                </div>';
+                $notes_number++;
+            }
+        ?>
+
     </div>
 </body>
 <script src="js/jquery-3.6.1.min.js"></script>
-<script src="js/calendar.js"></script>
 <script src="js/stickyNotes.js"></script>
-<script src="js/color-picker.js"></script>
+<script src="js/calendar.js"></script>
+<script>
+    
+    function sendForm() {
+        const content = document.getElementById('textAreaContent').value
+        let inputDate = document.getElementById('dateCreator').value.split('-')
+    
+        let date = inputDate[0] + '-' + inputDate[1] + '-' + inputDate[2]
+    
+        console.log(date)
+    
+        var query = "INSERT INTO `note`(`content`, `date`, `color`, `user_id`) VALUES ('" + content + "',`" + date + "`,`#fff`," + <?php echo $result['id'] ?> + ")"
+
+        console.log(query)
+        
+        <?php
+            $query = "document.write(query);";
+            echo $query;
+            $result = mysqli_query($conn, $query);
+
+              if ($result) {
+                echo "console.log('chuj')";
+            } else {
+                echo mysqli_errno($conn);
+                echo "console.log('nie chuj')";
+            }  
+
+            //INSERT INTO `note`(`id`, `content`, `date`, `color`, `user_id`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]')
+        ?>
+    }
+
+    document.querySelector('.send p').addEventListener("click", sendForm())
+
+</script>
 </html>
+<?php
+    mysqli_close($conn);
+?>

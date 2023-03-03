@@ -190,18 +190,28 @@ body {
     cursor: default;
 }
 .stickyNote .body .content textarea::placeholder,
-.stickyNote .body .bottom input::placeholder {
+.stickyNote .body .bottom .date input {
     font-style: italic;
     color: #70797e;
     transition: 200ms;
 }
-.stickyNote .body .bottom input::placeholder {
+.stickyNote .body .bottom .date input {
     font-size: 1rem;
 }
-.stickyNote .body .content textarea:hover::placeholder,
-.stickyNote .body .bottom input:hover::placeholder {
+.stickyNote .body .content textarea:hover,
+.stickyNote .body .bottom .date input:hover {
     color: #becfd8;
 }
+
+.stickyNote .body .bottom .send p {
+    padding: 5px 8px;
+    background-color: aqua;
+    cursor: pointer;
+    color: #000;
+    border: 0;
+    outline: none;
+}
+
 #textAreaContent::-webkit-scrollbar-track
 {
 	background-color: var(--sticky-note-bg-color);
