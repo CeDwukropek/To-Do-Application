@@ -50,6 +50,25 @@
     }
 ?>
 
+<script>
+    
+    function sendForm() {
+        const content = document.getElementById('textAreaContent').value
+        let inputDate = document.getElementById('dateCreator').value.split('-')
+    
+        let date = inputDate[0] + '-' + inputDate[1] + '-' + inputDate[2]
+        
+        <?php
+            echo "let id = $result[id];";
+
+            //INSERT INTO `note`(`id`, `content`, `date`, `color`, `user_id`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]')
+        ?>
+        var query = "INSERT INTO `note`(`content`, `date`, `color`, `user_id`) VALUES ('" + content + "',`" + date + "`,`#fff`," + id + ")"
+        console.log(query)
+    }
+
+</script>
+
 <body>
     <div class="calendarContainer">
         <div class="namesOfDays">
@@ -75,7 +94,7 @@
                         <input type="date" name="datetime" id="dateCreator">
                     </div>
                     <div class="send">
-                        <p>Zatwierdź</p>
+                        <p onclick="sendForm()">Zatwierdź</p>
                     </div>
                 </div>
             </div>
@@ -107,39 +126,6 @@
 <script src="js/jquery-3.6.1.min.js"></script>
 <script src="js/stickyNotes.js"></script>
 <script src="js/calendar.js"></script>
-<script>
-    
-    function sendForm() {
-        const content = document.getElementById('textAreaContent').value
-        let inputDate = document.getElementById('dateCreator').value.split('-')
-    
-        let date = inputDate[0] + '-' + inputDate[1] + '-' + inputDate[2]
-    
-        console.log(date)
-    
-        var query = "INSERT INTO `note`(`content`, `date`, `color`, `user_id`) VALUES ('" + content + "',`" + date + "`,`#fff`," + <?php echo $result['id'] ?> + ")"
-
-        console.log(query)
-        
-        <?php
-            $query = "document.write(query);";
-            echo $query;
-            $result = mysqli_query($conn, $query);
-
-              if ($result) {
-                echo "console.log('chuj')";
-            } else {
-                echo mysqli_errno($conn);
-                echo "console.log('nie chuj')";
-            }  
-
-            //INSERT INTO `note`(`id`, `content`, `date`, `color`, `user_id`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]')
-        ?>
-    }
-
-    document.querySelector('.send p').addEventListener("click", sendForm())
-
-</script>
 </html>
 <?php
     mysqli_close($conn);
