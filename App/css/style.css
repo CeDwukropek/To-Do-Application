@@ -203,7 +203,7 @@ body {
     color: #becfd8;
 }
 
-.stickyNote .body .bottom .send p {
+#send {
     padding: 5px 8px;
     background-color: aqua;
     cursor: pointer;

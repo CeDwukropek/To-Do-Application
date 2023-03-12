@@ -23,7 +23,7 @@
         $find_user = mysqli_query($conn, "SELECT id FROM user WHERE email = '$gmail' AND password = '$password'");
         $result = mysqli_fetch_array($find_user);
 
-        $notes = mysqli_query($conn, "SELECT * FROM note WHERE user_id = $result[id]");
+        $notes = mysqli_query($conn, "SELECT * FROM note WHERE user_id = $result[id] ORDER BY date");
 
         class note {
             public $id;
@@ -49,7 +49,7 @@
         $notes_number = 0;
     }
 ?>
-
+<script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 <script>
     
     function sendForm() {
@@ -60,11 +60,22 @@
         
         <?php
             echo "let id = $result[id];";
-
             //INSERT INTO `note`(`id`, `content`, `date`, `color`, `user_id`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]')
         ?>
-        var query = "INSERT INTO `note`(`content`, `date`, `color`, `user_id`) VALUES ('" + content + "',`" + date + "`,`#fff`," + id + ")"
-        console.log(query)
+        
+        var sqlQuery = "INSERT INTO note(`content`, `date`, `color`, `user_id`) VALUES ('" + content + "', '" + `${date}` + "', '#fff' ," + id + ")"
+
+        // Wywołaj zapytanie AJAX
+        $.ajax({
+            type: 'POST',
+            url: 'process.php',
+            data: {query: sqlQuery},
+            dataType: 'json',
+            success: function(response) {},
+            error: function(xhr, status, error) {}
+        });
+
+        location.reload();
     }
 
 </script>
@@ -93,8 +104,8 @@
                     <div class="date">
                         <input type="date" name="datetime" id="dateCreator">
                     </div>
-                    <div class="send">
-                        <p onclick="sendForm()">Zatwierdź</p>
+                    <div onclick="sendForm()">
+                        <p id="send">Zatwierdź</p>
                     </div>
                 </div>
             </div>
@@ -127,6 +138,3 @@
 <script src="js/stickyNotes.js"></script>
 <script src="js/calendar.js"></script>
 </html>
-<?php
-    mysqli_close($conn);
-?>
