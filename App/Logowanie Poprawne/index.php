@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Logowanie</h2>
-    <form action="login.php" method="post">
+    <form action="index.php" method="post">
         <label for="email">E-mail:</label>
         <input type="email" name="email" id="email"><br><br>
         <label for="password">Password:</label>
@@ -29,13 +29,11 @@ if(isset($_POST['zarejestruj'])){
 </html>
 <?php
 
-// połączenie z bazą danych
-$host = 'localhost'; // adres hosta
-$username = 'root'; // nazwa użytkownika bazy danych
-$password = ''; // hasło użytkownika bazy danych
-$database = 'to-do-application'; // nazwa bazy danych
+session_start();
+$_SESSION['log'] = false;
 
-$conn = mysqli_connect($host, $username, $password, $database);
+require_once('php/conncection.php');
+$conn = mysqli_connect($host, $user , $password, $database);
 
 if (!$conn) {
     die("Nieudane połączenie z bazą danych: " . mysqli_connect_error());
@@ -51,8 +49,17 @@ if (isset($_POST['register'])) {
     $query = "SELECT * FROM user WHERE email='$email'";
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) > 0) {
+        header("Location: register.php");
         echo "Użytkownik o takim adresie email już istnieje!";
-    } 
+    }else {
+        // dodanie nowego użytkownika do bazy danych
+        $query = "INSERT INTO user (email, password, preset_id) VALUES ('$email', '$password', $preset_id)";
+        if (mysqli_query($conn, $query)) {
+            echo "Rejestracja przebiegła pomyślnie!";
+        } else {
+            echo "Błąd rejestracji: " . mysqli_error($conn);
+        }
+    }
 }
 
 // obsługa formularza logowania
@@ -65,7 +72,10 @@ if (isset($_POST['login'])) {
     $result = mysqli_query($conn, $query);
     if (mysqli_num_rows($result) == 1) {
         // logowanie przebiegło pomyślnie - przekierowanie do strony głównej
-        header("Location: index.php");
+        $_SESSION['log'] = true;
+        $_SESSION['email'] = $email;
+        $_SESSION['password'] = $password;
+        header("Location: strona.php");
         exit();
     } else {
         echo "Nieprawidłowy email lub hasło!";
@@ -78,7 +88,7 @@ if (isset($_POST['login'])) {
         return 0;
      }else{
         if($email == 1){
-            header("Location: index.php");
+            header("Location: strona.php");
         }
      }
 }
